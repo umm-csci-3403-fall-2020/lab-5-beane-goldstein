@@ -14,12 +14,18 @@ public class EchoServer {
                 Socket client = sock.accept();
                 System.out.println("Got a request!");
 
+
+                InputStream byteInputStream = client.getInputStream();
+                OutputStream byteOutputStream = client.getOutputStream();
+
+                /*
                 ByteArrayInputStream byteInputStream = new ByteArrayInputStream(new byte[1]);
                 ByteArrayOutputStream byteOutputSteam = new ByteArrayOutputStream();
+                */
 
                 int inputByte;
                 while (true) {
-                    inputByte = byteInputStream.read();
+                    inputByte = byteInputStream.read(); //gives -1 if there's nothing left to read
                     if (inputByte != -1){
                         byteOutputSteam.write(inputByte);
                     } else {
