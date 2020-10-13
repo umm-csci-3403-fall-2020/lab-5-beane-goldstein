@@ -15,23 +15,24 @@ public class EchoClient {
         }
 
         try {
-            Socket socket = new Socket(server, portNumber);
+            Socket socket = new Socket(server, portNumber); //connects to the server
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
 
             int input;
-            char c;
 
             while ((input = System.in.read()) != -1){ //while go until it hits -1 or basically null
-                outputStream.write(input);
-                outputStream.flush();
-                System.out.write(inputStream.read());
-                System.out.flush();
+                //writing work
+                outputStream.write(input); //writes the data to be sent to the server
+                outputStream.flush(); //flushes the stream and forces bytes to written out
+                //prints the data that is sent back from the server
+                System.out.write(inputStream.read()); //what should be sent back to the client
+                System.out.flush(); //prints the flush
             }
 
-            inputStream.close();
-            outputStream.close();
-            socket.close();
+            inputStream.close(); //closes the inputStream
+            outputStream.close(); //closes the outputStream
+            socket.close(); //closes the socket
         }
         // basic error handling
         catch (ConnectException ce) {
